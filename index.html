@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aschauhan-dev cafe | Adarsh Singh Chauhan</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            latte: {
+              50: '#fdfbf7',
+              100: '#f8f2eb',
+              200: '#ede1d2',
+              300: '#dec6ab',
+              400: '#cca57d',
+              500: '#c48b52', // warm caramel gold
+              600: '#a36d39',
+              700: '#754a22',
+              800: '#4a2c16',
+              900: '#26160c', // rich mocha
+              950: '#140a05', // midnight espresso
+            },
+            sage: {
+              50: '#f3f7f4',
+              100: '#e3ece5',
+              500: '#587e66',
+              700: '#345240',
+              900: '#1c3024',
+            },
+            cork: '#cb9f6e',
+          },
+          fontFamily: {
+            serif: ['Fraunces', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            script: ['Caveat', 'cursive'],
+          },
+          boxShadow: {
+            'warm': '0 10px 25px -4px rgba(38, 22, 12, 0.08), 0 4px 10px -2px rgba(38, 22, 12, 0.04)',
+            'warm-lg': '0 20px 45px -8px rgba(38, 22, 12, 0.16)',
+            'cork-pin': '0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.12)',
+            'board-inset': 'inset 0 3px 8px rgba(0,0,0,0.3)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Warm Coffee Steam Animation */
+    @keyframes steamFloat {
+      0% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0.15;
+      }
+      50% {
+        transform: translateY(-22px) scaleX(1.35) skewX(5deg);
+        opacity: 0.75;
+      }
+      100% {
+        transform: translateY(-44px) scaleX(1.9) skewX(-5deg);
+        opacity: 0;
+      }
+    }
+
+    .steam-1 { animation: steamFloat 3.2s ease-in-out infinite; }
+    .steam-2 { animation: steamFloat 3.9s ease-in-out infinite 0.8s; }
+    .steam-3 { animation: steamFloat 3.4s ease-in-out infinite 1.6s; }
+
+    /* Ambient Audio Bar Pulses */
+    @keyframes soundBarMotion {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+    .sound-active .bar-1 { animation: soundBarMotion 0.8s ease-in-out infinite; }
+    .sound-active .bar-2 { animation: soundBarMotion 1.2s ease-in-out infinite 0.2s; }
+    .sound-active .bar-3 { animation: soundBarMotion 0.6s ease-in-out infinite 0.4s; }
+
+    /* Coffee Texture BG */
+    .texture-bg {
+      background-image: radial-gradient(rgba(196, 139, 82, 0.08) 1px, transparent 0);
+      background-size: 22px 22px;
+    }
+
+    /* Wooden Corkboard Pattern */
+    .corkboard-pattern {
+      background-color: #d6af80;
+      background-image: 
+        radial-gradient(#b88c5a 16%, transparent 16%), 
+        radial-gradient(#ab7e4c 16%, transparent 16%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+    }
+
+    .dark .corkboard-pattern {
+      background-color: #2b1a11;
+      background-image: 
+        radial-gradient(#3c2417 16%, transparent 16%), 
+        radial-gradient(#1e110a 16%, transparent 16%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+    }
+
+    .wood-frame {
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.35), 0 12px 30px rgba(20, 10, 5, 0.2);
+      border: 10px solid #55331c;
+    }
+
+    /* Receipt jagged cut border simulation */
+    .receipt-bottom {
+      background: radial-gradient(circle, transparent, transparent 50%, currentColor 50%, currentColor 100%);
+      background-size: 14px 14px;
+    }
+  </style>
+</head>
+<body class="bg-latte-50 text-latte-900 dark:bg-latte-950 dark:text-latte-100 font-sans transition-colors duration-300 selection:bg-latte-500 selection:text-white texture-bg min-h-screen flex flex-col justify-between">
+
+  <!-- ================= TOP CAFE BAR / HEADER ================= -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-latte-50/90 dark:bg-latte-950/90 border-b border-latte-200 dark:border-latte-800 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo (Inspired by your custom emblem: Laptop + Coffee Bean + Moon & Stars) -->
+      <a href="#hero" class="group flex items-center gap-3">
+        <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-latte-900 to-latte-800 dark:from-latte-800 dark:to-latte-900 text-latte-50 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform border border-latte-700/40">
+          <!-- Stylized Laptop Icon with Steam & Moon -->
+          <svg class="w-8 h-8 text-latte-400 group-hover:text-latte-300 transition-colors" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Laptop Body -->
+            <rect x="8" y="14" width="32" height="20" rx="3" fill="#2a160c" />
+            <path d="M4 36h40" />
+            <!-- Code brackets inside laptop -->
+            <path d="M19 21l-3 3 3 3" stroke="#f6cca1" />
+            <path d="M29 21l3 3-3 3" stroke="#f6cca1" />
+            <path d="M25 19l-2 7" stroke="#c48b52" />
+            <!-- Little crescent moon & stars -->
+            <path d="M22 6a4 4 0 0 1 3 4 4 4 0 0 0-3-4z" stroke="#e8b982" fill="#e8b982" stroke-width="1.5" />
+            <circle cx="30" cy="8" r="1" fill="#f6cca1" stroke="none" />
+            <!-- Coffee Bean steam top -->
+            <path d="M34 11c1-2 0-4-1-5" stroke="#c48b52" stroke-width="2" />
+          </svg>
+        </div>
+        <div>
+          <span class="block font-serif text-xl sm:text-2xl font-bold tracking-tight text-latte-900 dark:text-latte-100">
+            aschauhan<span class="text-latte-500 font-normal italic">-dev cafe</span>
+          </span>
+          <span class="block text-[11px] uppercase tracking-widest text-latte-600 dark:text-latte-400 font-semibold">Adarsh Singh Chauhan • B.Tech CSE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Board -->
+      <nav class="hidden lg:flex items-center gap-1 bg-latte-100 dark:bg-latte-900/80 p-1.5 rounded-full border border-latte-200 dark:border-latte-800 shadow-inner">
+        <a href="#about" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          About Barista
+        </a>
+        <a href="#experience" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          Specialty Roasts (Exp)
+        </a>
+        <a href="#menu" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          The Menu (Work)
+        </a>
+        <a href="#skills" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          Ingredients & Certs
+        </a>
+        <a href="#education" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          Academics
+        </a>
+        <a href="#contact" class="px-4 py-2 text-xs font-semibold rounded-full text-latte-800 dark:text-latte-200 hover:bg-latte-200/80 dark:hover:bg-latte-800 hover:text-latte-600 dark:hover:text-latte-400 transition-colors">
+          Leave a Note
+        </a>
+      </nav>
+
+      <!-- Action Controls (Ambience Audio, Theme Toggle, Mobile Drawer) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Cafe Audio Sound Generator Toggle -->
+        <button id="ambient-btn" title="Toggle Cafe Ambience (Lofi rain & gentle vinyl crackle)" class="px-3.5 py-2 rounded-full border border-latte-300 dark:border-latte-700 bg-latte-100 dark:bg-latte-900 text-latte-700 dark:text-latte-300 hover:border-latte-500 transition-all flex items-center gap-2 text-xs font-semibold shadow-sm">
+          <span class="flex items-end gap-0.5 h-4 w-4 justify-center" id="sound-indicator">
+            <span class="bar-1 w-0.5 bg-latte-600 dark:bg-latte-400 h-1.5 rounded-full"></span>
+            <span class="bar-2 w-0.5 bg-latte-600 dark:bg-latte-400 h-3 rounded-full"></span>
+            <span class="bar-3 w-0.5 bg-latte-600 dark:bg-latte-400 h-2 rounded-full"></span>
+          </span>
+          <span class="hidden sm:inline" id="sound-label">Cafe Lofi</span>
+        </button>
+
+        <!-- Theme Toggle (Morning Latte / Midnight Espresso) -->
+        <button id="theme-btn" title="Switch Theme" class="w-10 h-10 rounded-full border border-latte-300 dark:border-latte-700 bg-latte-100 dark:bg-latte-900 text-latte-800 dark:text-latte-200 hover:text-latte-500 flex items-center justify-center transition-all shadow-sm">
+          <i class="fa-solid fa-sun dark:hidden text-amber-600"></i>
+          <i class="fa-solid fa-moon hidden dark:block text-amber-300"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-full border border-latte-300 dark:border-latte-700 flex items-center justify-center text-latte-800 dark:text-latte-200">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-latte-200 dark:border-latte-800 bg-latte-50 dark:bg-latte-950 px-4 py-4 space-y-2">
+      <a href="#about" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">About Barista</a>
+      <a href="#experience" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">Specialty Roasts (Experience)</a>
+      <a href="#menu" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">The Menu (Projects)</a>
+      <a href="#skills" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">Ingredients & Certifications</a>
+      <a href="#education" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">Academics</a>
+      <a href="#contact" class="block py-2 px-3 text-sm font-semibold rounded-lg text-latte-800 dark:text-latte-200 hover:bg-latte-200 dark:hover:bg-latte-900">Leave a Note (Contact)</a>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+    <!-- Ambient Glows -->
+    <div class="absolute -top-12 -right-12 w-96 h-96 bg-latte-300/30 dark:bg-latte-800/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 -left-12 w-80 h-80 bg-sage-500/15 dark:bg-sage-700/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Hero Intro Text -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Live Status Tag -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-latte-100 dark:bg-latte-900 border border-latte-300 dark:border-latte-700 text-latte-800 dark:text-latte-200 text-xs sm:text-sm font-medium shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Serving from BUIT Bhopal • Batch of 2025–2029</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-latte-900 dark:text-latte-50 leading-tight">
+            Brewing clean code & <br class="hidden sm:inline">
+            <span class="italic font-normal text-latte-500 dark:text-latte-400">community growth</span> by the cup.
+          </h1>
+
+          <p class="text-base sm:text-lg text-latte-700 dark:text-latte-300 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            Welcome to <span class="font-bold text-latte-900 dark:text-latte-100 font-serif">aschauhan-dev cafe</span>. I am <span class="font-semibold text-latte-900 dark:text-latte-100">Adarsh Singh Chauhan</span>, a Computer Science & Engineering undergraduate, campus growth associate, and passionate web developer. Grab a warm cup, take in the aroma, and explore my journey!
+          </p>
+
+          <!-- Action CTAs -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#menu" class="px-7 py-3.5 rounded-full bg-latte-900 hover:bg-latte-800 text-latte-50 dark:bg-latte-500 dark:hover:bg-latte-600 dark:text-latte-950 font-semibold text-sm sm:text-base shadow-warm hover:shadow-warm-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2.5">
+              <span>Today's Menu</span>
+              <i class="fa-solid fa-mug-saucer text-xs"></i>
+            </a>
+            <a href="#contact" class="px-7 py-3.5 rounded-full bg-latte-100 dark:bg-latte-900 text-latte-800 dark:text-latte-200 border border-latte-300 dark:border-latte-700 font-semibold text-sm sm:text-base hover:bg-latte-200 dark:hover:bg-latte-800 transition-all flex items-center gap-2 shadow-sm">
+              <i class="fa-solid fa-note-sticky text-latte-500"></i>
+              <span>Pin a Note</span>
+            </a>
+            <a href="mailto:mraschauhan1@gmail.com" class="px-5 py-3.5 rounded-full border border-dashed border-latte-400 dark:border-latte-700 text-xs font-bold text-latte-700 dark:text-latte-300 hover:border-latte-600 transition-colors flex items-center gap-2">
+              <i class="fa-regular fa-paper-plane"></i>
+              <span>Email Barista</span>
+            </a>
+          </div>
+
+          <!-- Quick Roasting Stats -->
+          <div class="pt-8 border-t border-latte-200 dark:border-latte-800 flex items-center justify-center lg:justify-start gap-8 sm:gap-12 text-center lg:text-left">
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl font-bold text-latte-900 dark:text-latte-100">3+</div>
+              <div class="text-[11px] uppercase tracking-wider text-latte-600 dark:text-latte-400 font-semibold">Campus Roles</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl font-bold text-latte-900 dark:text-latte-100">90%+</div>
+              <div class="text-[11px] uppercase tracking-wider text-latte-600 dark:text-latte-400 font-semibold">Academic Merit</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl font-bold text-latte-900 dark:text-latte-100">6+</div>
+              <div class="text-[11px] uppercase tracking-wider text-latte-600 dark:text-latte-400 font-semibold">Certifications</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hero Barista Polaroid / Artisan Card with user photo & cafe stamp -->
+        <div class="lg:col-span-5 flex justify-center items-center">
+          <div class="relative w-80 sm:w-96">
+            
+            <!-- Cork shadow coaster -->
+            <div class="absolute -inset-2 bg-gradient-to-tr from-latte-300 to-amber-200/40 dark:from-latte-900 dark:to-latte-800 rounded-3xl transform rotate-2 blur-sm"></div>
+
+            <!-- Polaroid Card Structure -->
+            <div class="relative bg-white dark:bg-latte-900 p-4 sm:p-5 rounded-2xl shadow-warm-lg border border-latte-200 dark:border-latte-800 transform -rotate-1 hover:rotate-0 transition-all duration-300">
+              
+              <!-- Wooden Clip / Paper Clip -->
+              <div class="absolute -top-3.5 left-10 text-latte-500 text-2xl z-20">
+                <i class="fa-solid fa-paperclip"></i>
+              </div>
+
+              <!-- Barista Portrait with Photo Fallback & Interactive Switcher -->
+              <div class="aspect-square rounded-xl overflow-hidden bg-latte-900 relative group border border-latte-200 dark:border-latte-800 shadow-inner">
+                <img id="barista-photo" 
+                     src="IMG_20260305_015141_825_2.webp" 
+                     alt="Adarsh Singh Chauhan - Barista Developer" 
+                     class="w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-500"
+                     onerror="this.src='IMG_20260305_015141_825.webp'">
+                
+                <!-- Vintage Coffee Tint Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-latte-950/85 via-latte-950/20 to-transparent flex flex-col justify-end p-4 text-white pointer-events-none">
+                  <span class="font-script text-2xl text-amber-200">Adarsh Singh Chauhan</span>
+                  <span class="text-[10px] tracking-widest uppercase font-semibold text-latte-300">Barista & Developer @ BUIT Bhopal</span>
+                </div>
+
+                <!-- Cafe Stamp Seal -->
+                <div class="absolute top-3 right-3 w-14 h-14 rounded-full border-2 border-dashed border-amber-300/80 bg-latte-900/75 backdrop-blur-sm flex flex-col items-center justify-center text-amber-300 transform rotate-12 shadow">
+                  <span class="text-[8px] font-bold uppercase tracking-wider">BATCH</span>
+                  <span class="font-serif text-xs font-black">2029</span>
+                </div>
+
+                <!-- Floating Quick Upload / Change Photo Overlay Button -->
+                <label for="barista-photo-input" title="Upload / Change Portrait" class="absolute top-3 left-3 z-30 px-2.5 py-1.5 rounded-full bg-latte-950/80 hover:bg-latte-900 text-latte-200 border border-latte-700/80 backdrop-blur-sm text-[11px] font-semibold flex items-center gap-1.5 cursor-pointer shadow hover:scale-105 transition-all">
+                  <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                  <span class="hidden sm:inline">Change Photo</span>
+                </label>
+                <input type="file" id="barista-photo-input" accept="image/*" class="hidden">
+              </div>
+
+              <!-- Polaroid Bottom Caption & Reset Trigger -->
+              <div class="mt-4 pt-3 border-t border-latte-100 dark:border-latte-800 flex items-center justify-between text-xs text-latte-600 dark:text-latte-400 font-medium">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-location-dot text-latte-500"></i> Bhopal (M.P.), India
+                </span>
+                <button id="reset-photo-btn" class="hidden text-[10px] text-latte-500 hover:text-latte-700 dark:hover:text-latte-300 underline font-semibold">
+                  Reset default
+                </button>
+                <span id="roast-badge" class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-mug-hot text-latte-500"></i> Pure Dark Roast
+                </span>
+              </div>
+
+              <!-- Handwritten Sticky Note Pinned to Card -->
+              <div class="absolute -bottom-5 -right-4 bg-amber-100 text-latte-950 px-4 py-2.5 rounded shadow-cork-pin transform rotate-6 border border-amber-200 text-xs font-script text-base">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-600 block mx-auto -mt-3.5 mb-1 shadow-sm"></span>
+                "Brewing ideas into reality!"
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT THE BARISTA ================= -->
+  <section id="about" class="py-20 bg-latte-100/70 dark:bg-latte-900/40 border-y border-latte-200 dark:border-latte-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="font-script text-2xl text-latte-500">Behind the Counter</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          Meet The Barista Developer
+        </h2>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Pillar 1: Engineering Focus -->
+        <div class="bg-latte-50 dark:bg-latte-900 p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-laptop-code text-latte-500"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-latte-900 dark:text-latte-100">B.Tech CSE Undergrad</h3>
+          <p class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 leading-relaxed">
+            Currently pursuing Computer Science & Engineering at <strong>Barkatullah University Institute of Technology</strong> (BUIT), Bhopal (2025–2029). Deepening foundational knowledge in computer architecture, clean algorithms, and web systems.
+          </p>
+        </div>
+
+        <!-- Pillar 2: Community & Growth -->
+        <div class="bg-latte-50 dark:bg-latte-900 p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-bullhorn text-latte-500"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-latte-900 dark:text-latte-100">Growth & Brand Advocacy</h3>
+          <p class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 leading-relaxed">
+            Proven track record bridging collegiate talent with leading brands like <strong>Air India Limited</strong>, <strong>Gradientts</strong>, and <strong>Internshala</strong> through strategic campus campaigns and social media marketing.
+          </p>
+        </div>
+
+        <!-- Pillar 3: Web Crafting & AI -->
+        <div class="bg-latte-50 dark:bg-latte-900 p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-wand-magic-sparkles text-latte-500"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-latte-900 dark:text-latte-100">Modern Web & Cloud</h3>
+          <p class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 leading-relaxed">
+            Certified in <strong>HTML with AI</strong>, <strong>CSS3</strong>, and <strong>Cloud Computing</strong>. Passionate about blending aesthetics with performance to deliver thoughtful, cozy user interfaces.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SPECIALTY ROASTS (EXPERIENCE) ================= -->
+  <section id="experience" class="py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="font-script text-2xl text-latte-500">On The Grind</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          Specialty Roasts & Experience
+        </h2>
+        <p class="text-latte-600 dark:text-latte-400 text-sm mt-2">
+          Real-world roles where leadership, community outreach, and brand growth blend together.
+        </p>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- Experience Cafe Receipt Timeline -->
+      <div class="relative border-l-2 border-latte-300 dark:border-latte-800 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10">
+
+        <!-- Role 1: Gradientts -->
+        <div class="relative group">
+          <div class="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-full bg-latte-500 text-white flex items-center justify-center text-[10px] shadow-sm ring-4 ring-latte-50 dark:ring-latte-950">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+
+          <div class="bg-latte-50 dark:bg-latte-900 p-6 sm:p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-latte-900 dark:text-latte-100">
+                Campus Growth Associate Intern <span class="text-latte-500 font-normal">@ Gradientts</span>
+              </h3>
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                Sep 2026 - Present
+              </span>
+            </div>
+            
+            <p class="text-xs uppercase tracking-wider font-semibold text-latte-600 dark:text-latte-400 mb-3">
+              Roast Profile: Community Expansion, Organic Engagement & Strategic Growth
+            </p>
+
+            <ul class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 space-y-2 list-disc list-inside">
+              <li>Spearheading collegiate growth strategies and user acquisition channels across university circles.</li>
+              <li>Designing impactful promotional drives and leveraging social media channels to amplify platform adoption.</li>
+              <li>Collaborating with cross-functional campus leads to organize tech awareness and skill-sharing mixers.</li>
+            </ul>
+
+            <div class="mt-4 pt-3 border-t border-latte-200 dark:border-latte-800 flex flex-wrap gap-2">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Community Growth</span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Brand Marketing</span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Campus Liaison</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role 2: Air India Limited -->
+        <div class="relative group">
+          <div class="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-full bg-latte-400 dark:bg-latte-600 text-white flex items-center justify-center text-[10px] shadow-sm ring-4 ring-latte-50 dark:ring-latte-950">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+
+          <div class="bg-latte-50 dark:bg-latte-900 p-6 sm:p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-latte-900 dark:text-latte-100">
+                Campus Ambassador <span class="text-latte-500 font-normal">@ Air India Limited</span>
+              </h3>
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                Oct 2026 - Present
+              </span>
+            </div>
+
+            <p class="text-xs uppercase tracking-wider font-semibold text-latte-600 dark:text-latte-400 mb-3">
+              Roast Profile: Brand Representation, Corporate Relations & Student Engagement
+            </p>
+
+            <ul class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 space-y-2 list-disc list-inside">
+              <li>Serving as the collegiate voice representing India’s flagship carrier on campus grounds.</li>
+              <li>Building engagement for educational travel initiatives, youth programs, and corporate student outreach.</li>
+              <li>Developing brand advocacy and establishing seamless communication bridges between university bodies and aviation stakeholders.</li>
+            </ul>
+
+            <div class="mt-4 pt-3 border-t border-latte-200 dark:border-latte-800 flex flex-wrap gap-2">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Aviation Advocacy</span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Public Relations</span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Event Direction</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role 3: Internshala -->
+        <div class="relative group">
+          <div class="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-full bg-latte-300 dark:bg-latte-700 text-latte-900 dark:text-latte-100 flex items-center justify-center text-[10px] shadow-sm ring-4 ring-latte-50 dark:ring-latte-950">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+
+          <div class="bg-latte-50 dark:bg-latte-900 p-6 sm:p-7 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-latte-900 dark:text-latte-100">
+                Internshala Student Partner (ISP) <span class="text-latte-500 font-normal">@ Internshala</span>
+              </h3>
+              <span class="px-3 py-1 text-xs font-semibold rounded-full bg-latte-200 dark:bg-latte-800 text-latte-800 dark:text-latte-200">
+                Sep 2026 - Oct 2026
+              </span>
+            </div>
+
+            <p class="text-xs uppercase tracking-wider font-semibold text-latte-600 dark:text-latte-400 mb-3">
+              Roast Profile: Peer Mentorship, Opportunity Enablement & Digital Marketing
+            </p>
+
+            <ul class="text-xs sm:text-sm text-latte-700 dark:text-latte-300 space-y-2 list-disc list-inside">
+              <li>Empowered college peers with accessible internship listings, training programs, and career roadmaps.</li>
+              <li>Successfully conducted digital campaigns resulting in student registrations and skill course uptake.</li>
+              <li>Recognized for proactive initiative and effective student leadership.</li>
+            </ul>
+
+            <div class="mt-4 pt-3 border-t border-latte-200 dark:border-latte-800 flex flex-wrap gap-2">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Peer Guidance</span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-latte-200/80 dark:bg-latte-800 text-latte-800 dark:text-latte-200">Digital Campaigns</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= THE MENU (PROJECTS & CREATIONS) ================= -->
+  <section id="menu" class="py-24 bg-latte-100/60 dark:bg-latte-900/40 border-t border-latte-200 dark:border-latte-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="font-script text-2xl text-latte-500">Handcrafted Creations</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          The Artisan Menu
+        </h2>
+        <p class="text-latte-600 dark:text-latte-400 text-sm mt-2">Filter our signature brews by category and domain.</p>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 bg-latte-200/80 dark:bg-latte-900 rounded-2xl border border-latte-300 dark:border-latte-800 shadow-inner">
+          <button class="filter-tab active-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-latte-900 text-latte-50 dark:bg-latte-500 dark:text-latte-950 shadow-sm" data-category="all">
+            <i class="fa-solid fa-mug-saucer mr-1.5"></i> All Items
+          </button>
+          <button class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-latte-700 dark:text-latte-300 hover:text-latte-900 dark:hover:text-latte-50 transition-all" data-category="web">
+            <i class="fa-solid fa-code mr-1.5"></i> Web Crafting
+          </button>
+          <button class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-latte-700 dark:text-latte-300 hover:text-latte-900 dark:hover:text-latte-50 transition-all" data-category="growth">
+            <i class="fa-solid fa-rocket mr-1.5"></i> Brand & Growth
+          </button>
+          <button class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-latte-700 dark:text-latte-300 hover:text-latte-900 dark:hover:text-latte-50 transition-all" data-category="cloud">
+            <i class="fa-solid fa-cloud mr-1.5"></i> Cloud & AI
+          </button>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Project 1: Cafe Portfolio Engine -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="web">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-latte-900/90 text-latte-100 backdrop-blur-sm">
+                Web Crafting
+              </span>
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?fit=crop&w=700&h=450&q=80" alt="aschauhan-dev cafe Portfolio" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>Medium Roast</span>
+                <span>Self-Contained Engine</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                aschauhan-dev cafe Engine
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>Pure Web Audio synthesizer, dual roasted palettes (Morning Latte & Midnight Espresso), real-time corkboard local storage.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">HTML5</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">CSS3</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Web Audio API</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('cafeportfolio')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="https://github.com" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-brands fa-github text-sm"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Gradientts Campus Growth Campaign -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="growth">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-latte-500 text-white backdrop-blur-sm">
+                Brand & Growth
+              </span>
+              <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?fit=crop&w=700&h=450&q=80" alt="Gradientts Growth Playbook" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>Single Origin</span>
+                <span>Growth Strategy</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                Gradientts Growth Blueprint
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>Organic student community acquisition model, peer-to-peer viral engagement cycles, and brand positioning.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Growth Marketing</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Brand Mgmt</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Analytics</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('gradientts')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="#contact" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-solid fa-share-nodes text-xs"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Air India Ambassador Showcase -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="growth">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-700 text-white backdrop-blur-sm">
+                Collegiate Liaison
+              </span>
+              <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?fit=crop&w=700&h=450&q=80" alt="Air India Campus Drive" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>Bold Roast</span>
+                <span>Flagship Representation</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                Air India Collegiate Outreach
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>National brand storytelling on campus, youth travel program distribution, and collegiate leadership execution.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Public Speaking</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Outreach</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Air India</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('airindia')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="#contact" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-solid fa-bullhorn text-xs"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: AI Web Crafter Suite -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="cloud">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-sage-500 text-white backdrop-blur-sm">
+                Cloud & AI
+              </span>
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?fit=crop&w=700&h=450&q=80" alt="HTML with AI Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>French Roast</span>
+                <span>AI Prompted Markup</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                AI-Assisted Web Prototype
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>Prompt engineering combined with semantic HTML5 structures to rapidly build accessible interfaces and micro-interactions.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">HTML with AI</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">CSS3</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">LLM Prompts</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('aiweb')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="https://github.com" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-brands fa-github text-sm"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Cloud Infrastructure Practice -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="cloud">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-sky-700 text-white backdrop-blur-sm">
+                Cloud Systems
+              </span>
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?fit=crop&w=700&h=450&q=80" alt="Cloud Computing Labs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>Cold Brew</span>
+                <span>Scalable Virtualization</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                Cloud Computing Lab Suite
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>Foundations of cloud deployment models (IaaS, PaaS, SaaS), server virtualization, and resilient storage.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Cloud Architecture</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Virtualization</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('cloudlab')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="#contact" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-solid fa-server text-xs"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: BUIT Campus Community Portal -->
+        <article class="project-card group bg-latte-50 dark:bg-latte-900 rounded-2xl overflow-hidden border border-latte-200 dark:border-latte-800 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between" data-category="web">
+          <div>
+            <div class="relative overflow-hidden aspect-video bg-latte-200 dark:bg-latte-800">
+              <span class="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-latte-900 text-latte-100 backdrop-blur-sm">
+                Web & Community
+              </span>
+              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?fit=crop&w=700&h=450&q=80" alt="BUIT Student Hub" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-latte-500 font-semibold mb-1">
+                <span>Sweet Crema</span>
+                <span>Bhopal Student Network</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-latte-900 dark:text-latte-100 group-hover:text-latte-500 transition-colors">
+                Bhopal Collegiate Network
+              </h3>
+
+              <div class="mt-3 p-3 rounded-xl bg-latte-100/80 dark:bg-latte-800/60 border border-latte-200 dark:border-latte-700 text-xs text-latte-700 dark:text-latte-300 space-y-1">
+                <span class="font-bold text-latte-800 dark:text-latte-200 uppercase tracking-wider text-[10px] block">Tasting Notes:</span>
+                <p>Interactive student portal concept tailored for BUIT engineers to share notes, discover hackathons, and connect with mentors.</p>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">HTML5</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">CSS Grid</span>
+                <span class="px-2.5 py-1 text-xs rounded-md bg-latte-200/70 dark:bg-latte-800 text-latte-800 dark:text-latte-200 font-medium">Community UX</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-latte-200 dark:border-latte-800 mt-4">
+            <button onclick="openModal('bhopalhub')" class="text-xs font-bold text-latte-900 dark:text-latte-200 hover:text-latte-500 flex items-center gap-1.5">
+              <span>View Recipe</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-2">
+              <a href="#contact" class="w-8 h-8 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-500 hover:text-white transition-colors"><i class="fa-solid fa-users text-xs"></i></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INGREDIENTS & CERTIFICATIONS ================= -->
+  <section id="skills" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="font-script text-2xl text-latte-500">Pantry & Certifications</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          The Secret Ingredients
+        </h2>
+        <p class="text-latte-600 dark:text-latte-400 text-sm mt-2">
+          Verified industry certifications and skills stocked in the barista cabinet.
+        </p>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- Skills Mason Jars Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 mb-16">
+        
+        <!-- Jar 1: HTML5 with AI -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 dark:bg-latte-800 text-amber-700 dark:text-amber-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-brands fa-html5"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">HTML with AI</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">Semantic Markup & Prompted UI</p>
+        </div>
+
+        <!-- Jar 2: Cascading Style Sheets (CSS3) -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-blue-100 dark:bg-latte-800 text-blue-700 dark:text-blue-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-brands fa-css3-alt"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">CSS3 Styling</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">Flex, Grid, Animations & Themes</p>
+        </div>
+
+        <!-- Jar 3: Cloud Computing -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-sky-100 dark:bg-latte-800 text-sky-700 dark:text-sky-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-cloud"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">Cloud Computing</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">IaaS, Scalability & Deployments</p>
+        </div>
+
+        <!-- Jar 4: Brand Management -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-purple-100 dark:bg-latte-800 text-purple-700 dark:text-purple-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-copyright"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">Brand Management</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">Positioning & Identity Building</p>
+        </div>
+
+        <!-- Jar 5: Social Media Marketing -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-rose-100 dark:bg-latte-800 text-rose-700 dark:text-rose-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">Social Marketing</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">Growth Campaigns & Content</p>
+        </div>
+
+        <!-- Jar 6: Effective Leadership -->
+        <div class="group bg-latte-50 dark:bg-latte-900 p-5 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-sm hover:shadow-warm transition-all duration-300 transform hover:-translate-y-1.5 text-center relative">
+          <div class="w-12 h-2 mx-auto bg-latte-300 dark:bg-latte-700 rounded-full mb-3 border border-latte-400"></div>
+          <div class="w-12 h-12 mx-auto rounded-xl bg-emerald-100 dark:bg-latte-800 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+          <h4 class="font-serif font-bold text-sm text-latte-900 dark:text-latte-100">Leadership</h4>
+          <span class="block text-[10px] text-latte-500 font-bold uppercase mt-1">Certified</span>
+          <p class="text-[11px] text-latte-600 dark:text-latte-400 mt-1">Team Coordination & Vision</p>
+        </div>
+
+      </div>
+
+      <!-- Formal Certification Seals Banner -->
+      <div class="bg-latte-100 dark:bg-latte-900/60 p-6 sm:p-8 rounded-3xl border border-latte-200 dark:border-latte-800">
+        <div class="flex items-center gap-3 mb-6">
+          <i class="fa-solid fa-certificate text-latte-500 text-xl"></i>
+          <h3 class="font-serif font-bold text-xl text-latte-900 dark:text-latte-100">Official Roasted Certifications</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">Social Media Marketing</div>
+              <div class="text-[11px] text-latte-500">Professional Certification</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">Brand Management</div>
+              <div class="text-[11px] text-latte-500">Corporate & Identity Marketing</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">Effective Leadership</div>
+              <div class="text-[11px] text-latte-500">Team Governance & Mentorship</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">Cloud Computing</div>
+              <div class="text-[11px] text-latte-500">Distributed & Cloud Infrastructures</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">HTML with AI</div>
+              <div class="text-[11px] text-latte-500">Intelligent Web Authoring</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 rounded-xl bg-latte-50 dark:bg-latte-800/80 border border-latte-200 dark:border-latte-700">
+            <i class="fa-solid fa-award text-amber-600 text-xl"></i>
+            <div>
+              <div class="text-xs font-bold text-latte-900 dark:text-latte-100">Cascading Style Sheets (CSS3)</div>
+              <div class="text-[11px] text-latte-500">Modern Layout & Responsive Design</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ACADEMIC CHALKBOARD ================= -->
+  <section id="education" class="py-20 bg-latte-100/70 dark:bg-latte-900/30 border-y border-latte-200 dark:border-latte-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="font-script text-2xl text-latte-500">Foundational Roasting</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          Academic Heritage & Scores
+        </h2>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- Wooden Framed Chalkboard -->
+      <div class="wood-frame rounded-2xl bg-slate-900 text-latte-100 p-6 sm:p-10 shadow-2xl relative">
+        <div class="flex items-center justify-between border-b border-latte-700/60 pb-3 mb-8">
+          <span class="font-script text-2xl sm:text-3xl text-amber-300">Classroom Roast Ledger</span>
+          <span class="text-xs tracking-wider font-mono text-latte-400">OFFICIAL LOG</span>
+        </div>
+
+        <div class="space-y-8">
+          
+          <!-- BUIT Bhopal -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                <h3 class="font-serif text-xl font-bold text-white">
+                  Barkatullah University Institute of Technology (BUIT), Bhopal
+                </h3>
+              </div>
+              <p class="text-sm text-latte-300 mt-1">
+                Bachelor of Technology (B.Tech) • Computer Science & Engineering
+              </p>
+              <p class="text-xs text-latte-400 mt-1 font-script text-base">
+                Currently pursuing full engineering curriculum, systems programming, and modern web tech.
+              </p>
+            </div>
+            <div class="sm:text-right shrink-0">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                2025 – 2029 (Expected)
+              </span>
+              <span class="block text-xs text-emerald-400 mt-1 font-semibold">Undergraduate Scholar</span>
+            </div>
+          </div>
+
+          <!-- School of Excellence, Sidhi (10+2) -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <h3 class="font-serif text-lg font-bold text-white">
+                  School of Excellence, Sidhi (M.P.)
+                </h3>
+              </div>
+              <p class="text-sm text-latte-300 mt-1">
+                10+2 Higher Secondary Certificate
+              </p>
+            </div>
+            <div class="sm:text-right shrink-0">
+              <span class="text-xs text-latte-400 block">2023 – 2025</span>
+              <span class="font-serif text-xl font-bold text-amber-300">90.6%</span>
+            </div>
+          </div>
+
+          <!-- Sarvodaya Vidya Mandir, Sidhi (10th) -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <h3 class="font-serif text-lg font-bold text-white">
+                  Sarvodaya Vidya Mandir, Sidhi (M.P.)
+                </h3>
+              </div>
+              <p class="text-sm text-latte-300 mt-1">
+                High School (Class 10)
+              </p>
+            </div>
+            <div class="sm:text-right shrink-0">
+              <span class="text-xs text-latte-400 block">Completed 2023</span>
+              <span class="font-serif text-xl font-bold text-amber-300">94.8%</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= COFFEE CORKBOARD & ORDER TICKET (CONTACT) ================= -->
+  <section id="contact" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="font-script text-2xl text-latte-500">Corner Bulletin Board</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-latte-900 dark:text-latte-100 mt-1">
+          Place an Order & Pin a Note
+        </h2>
+        <p class="text-latte-600 dark:text-latte-400 text-sm mt-2">
+          Want to collaborate or drop a friendly hello? Pin a sticky note to the public board below!
+        </p>
+        <div class="w-16 h-1 bg-latte-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Interactive Corkboard -->
+        <div class="lg:col-span-7">
+          <div class="wood-frame rounded-2xl overflow-hidden corkboard-pattern p-6 sm:p-8 min-h-[500px] shadow-2xl relative flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-6 pb-2 border-b border-latte-900/20 dark:border-white/10">
+                <span class="font-script text-2xl sm:text-3xl font-bold text-latte-900 dark:text-amber-100">
+                  Community Pinboard
+                </span>
+                <span class="text-xs font-semibold bg-latte-900/80 text-latte-100 dark:bg-amber-100 dark:text-latte-900 px-3 py-1 rounded-full shadow-sm">
+                  Active Sticky Notes
+                </span>
+              </div>
+
+              <!-- Notes Container (Saved in LocalStorage) -->
+              <div id="notes-container" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                
+                <!-- Pinned Note 1 -->
+                <div class="bg-amber-100 text-latte-950 p-4 rounded-lg shadow-cork-pin transform -rotate-2 relative transition-transform hover:scale-105 border border-amber-200">
+                  <span class="w-3.5 h-3.5 rounded-full bg-red-600 block absolute -top-1.5 left-1/2 -translate-x-1/2 shadow"></span>
+                  <p class="font-script text-xl leading-snug">"Great to see a fellow BUITian building such an aesthetic cafe portfolio!"</p>
+                  <div class="mt-3 flex items-center justify-between text-xs font-sans font-bold text-amber-900/80">
+                    <span>- Senior Engineer @ BUIT</span>
+                    <span class="text-[10px] font-normal">Recent</span>
+                  </div>
+                </div>
+
+                <!-- Pinned Note 2 -->
+                <div class="bg-lime-100 text-latte-950 p-4 rounded-lg shadow-cork-pin transform rotate-2 relative transition-transform hover:scale-105 border border-lime-200">
+                  <span class="w-3.5 h-3.5 rounded-full bg-blue-600 block absolute -top-1.5 left-1/2 -translate-x-1/2 shadow"></span>
+                  <p class="font-script text-xl leading-snug">"The Air India ambassador initiative was super organized on campus. Keep going Adarsh!"</p>
+                  <div class="mt-3 flex items-center justify-between text-xs font-sans font-bold text-lime-900/80">
+                    <span>- Campus Lead</span>
+                    <span class="text-[10px] font-normal">Recent</span>
+                  </div>
+                </div>
+
+                <!-- Pinned Note 3 -->
+                <div class="bg-rose-100 text-latte-950 p-4 rounded-lg shadow-cork-pin transform rotate-1 relative transition-transform hover:scale-105 border border-rose-200">
+                  <span class="w-3.5 h-3.5 rounded-full bg-amber-600 block absolute -top-1.5 left-1/2 -translate-x-1/2 shadow"></span>
+                  <p class="font-script text-xl leading-snug">"Loved the lofi ambience sound player! Best study portfolio so far."</p>
+                  <div class="mt-3 flex items-center justify-between text-xs font-sans font-bold text-rose-900/80">
+                    <span>- Mansi</span>
+                    <span class="text-[10px] font-normal">Recent</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Helpful note at corkboard bottom -->
+            <p class="text-center font-script text-lg text-latte-900/70 dark:text-amber-200/70 mt-8">
+              ~ Submit the order ticket on the right to post your note directly to this board! ~
+            </p>
+          </div>
+        </div>
+
+        <!-- The Order Slip / Contact Card -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Order Form -->
+          <div class="bg-latte-50 dark:bg-latte-900 p-6 sm:p-8 rounded-2xl border border-latte-200 dark:border-latte-800 shadow-warm relative">
+            <div class="border-b-2 border-dashed border-latte-300 dark:border-latte-800 pb-4 mb-6">
+              <div class="flex justify-between items-center">
+                <span class="font-serif font-bold text-lg text-latte-900 dark:text-latte-100">Barista Order Slip</span>
+                <span class="font-mono text-xs text-latte-500 font-bold">SLIP #2026-BPL</span>
+              </div>
+              <p class="text-xs text-latte-600 dark:text-latte-400 mt-1">Order a project or send a note to Adarsh.</p>
+            </div>
+
+            <form id="order-form" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-latte-700 dark:text-latte-300 mb-1" for="customer-name">
+                  Customer / Your Name *
+                </label>
+                <input type="text" id="customer-name" required placeholder="e.g. Maya Sharma" class="w-full px-4 py-2.5 rounded-xl bg-latte-100 dark:bg-latte-800 border border-latte-300 dark:border-latte-700 text-latte-900 dark:text-latte-100 text-sm focus:outline-none focus:border-latte-500 transition-colors">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-latte-700 dark:text-latte-300 mb-1" for="customer-email">
+                  Return Address (Email) *
+                </label>
+                <input type="email" id="customer-email" required placeholder="maya@domain.com" class="w-full px-4 py-2.5 rounded-xl bg-latte-100 dark:bg-latte-800 border border-latte-300 dark:border-latte-700 text-latte-900 dark:text-latte-100 text-sm focus:outline-none focus:border-latte-500 transition-colors">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-latte-700 dark:text-latte-300 mb-1" for="order-drink">
+                  Select Brew Style
+                </label>
+                <select id="order-drink" class="w-full px-4 py-2.5 rounded-xl bg-latte-100 dark:bg-latte-800 border border-latte-300 dark:border-latte-700 text-latte-900 dark:text-latte-100 text-sm focus:outline-none focus:border-latte-500 transition-colors">
+                  <option value="Web Crafting Pour-Over">Web Crafting Pour-Over (Web Development)</option>
+                  <option value="Campus Growth Espresso">Campus Growth Espresso (Brand / Campus Outreach)</option>
+                  <option value="Cloud Systems Cold Brew">Cloud Systems Cold Brew (Cloud & Architecture)</option>
+                  <option value="Casual Latte Chat">Casual Latte Chat (Friendly Hello / Mentorship)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-latte-700 dark:text-latte-300 mb-1" for="order-message">
+                  Order Details / Message *
+                </label>
+                <textarea id="order-message" required rows="3" placeholder="Tell Adarsh what you'd like to collaborate on..." class="w-full px-4 py-2.5 rounded-xl bg-latte-100 dark:bg-latte-800 border border-latte-300 dark:border-latte-700 text-latte-900 dark:text-latte-100 text-sm focus:outline-none focus:border-latte-500 transition-colors"></textarea>
+              </div>
+
+              <div class="flex items-center gap-2 pt-1">
+                <input type="checkbox" id="pin-to-board" class="w-4 h-4 rounded text-latte-500 accent-latte-500 border-latte-300" checked>
+                <label for="pin-to-board" class="text-xs text-latte-700 dark:text-latte-300">Pin this note to the community corkboard</label>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-latte-900 hover:bg-latte-800 dark:bg-latte-500 dark:hover:bg-latte-600 text-latte-50 dark:text-latte-950 font-bold text-sm tracking-wide shadow-warm hover:shadow-warm-lg transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-mug-saucer"></i>
+                <span>Serve Order to Adarsh</span>
+              </button>
+            </form>
+
+            <!-- Success Alert Banner -->
+            <div id="order-success" class="hidden mt-4 p-4 rounded-xl bg-emerald-100 dark:bg-emerald-950 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs flex items-start gap-3">
+              <i class="fa-solid fa-circle-check text-emerald-600 text-base mt-0.5"></i>
+              <div>
+                <span class="font-bold block">Order Ticket Received!</span>
+                Thank you for the warm note! It has been pinned to the board. Adarsh will reach back to you shortly.
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Coordinates Card -->
+          <div class="bg-latte-100/80 dark:bg-latte-900/60 p-6 rounded-2xl border border-latte-200 dark:border-latte-800 space-y-3">
+            <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-latte-800 dark:text-latte-200">
+              Direct Barista Channels
+            </h4>
+            
+            <div class="space-y-2 text-xs sm:text-sm">
+              <a href="mailto:mraschauhan1@gmail.com" class="flex items-center gap-3 text-latte-700 dark:text-latte-300 hover:text-latte-500 transition-colors">
+                <i class="fa-solid fa-envelope w-5 text-latte-500"></i>
+                <span>mraschauhan1@gmail.com</span>
+              </a>
+              <a href="https://instagram.com/a.s.chauhxn" target="_blank" rel="noreferrer" class="flex items-center gap-3 text-latte-700 dark:text-latte-300 hover:text-latte-500 transition-colors">
+                <i class="fa-brands fa-instagram w-5 text-latte-500"></i>
+                <span>@a.s.chauhxn</span>
+              </a>
+              <div class="flex items-center gap-3 text-latte-700 dark:text-latte-300">
+                <i class="fa-solid fa-location-dot w-5 text-latte-500"></i>
+                <span>Bhopal, Madhya Pradesh, India</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-latte-900 text-latte-200 dark:bg-latte-950 dark:border-t dark:border-latte-800 py-12 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-latte-800">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-latte-500 text-latte-950 flex items-center justify-center text-lg font-bold">
+            <i class="fa-solid fa-mug-hot"></i>
+          </div>
+          <div>
+            <span class="font-serif text-lg font-bold text-latte-50">aschauhan-dev cafe</span>
+            <p class="text-xs text-latte-400">Crafted with coffee beans, HTML, CSS & Campus Growth.</p>
+          </div>
+        </div>
+
+        <!-- Social Cups -->
+        <div class="flex items-center gap-3">
+          <a href="https://instagram.com/a.s.chauhxn" target="_blank" rel="noreferrer" class="w-10 h-10 rounded-full bg-latte-800 hover:bg-latte-700 text-latte-200 flex items-center justify-center transition-colors" title="Instagram @a.s.chauhxn">
+            <i class="fa-brands fa-instagram text-base"></i>
+          </a>
+          <a href="mailto:mraschauhan1@gmail.com" class="w-10 h-10 rounded-full bg-latte-800 hover:bg-latte-700 text-latte-200 flex items-center justify-center transition-colors" title="Email">
+            <i class="fa-solid fa-envelope text-base"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-latte-400 gap-4">
+        <p>&copy; <span id="current-year"></span> Adarsh Singh Chauhan. All rights reserved.</p>
+        <p class="flex items-center gap-1.5">
+          <span>Freshly Roasted in Bhopal</span>
+          <i class="fa-solid fa-heart text-latte-500"></i>
+          <span>for the Tech Community</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= PROJECT RECIPE MODAL ================= -->
+  <div id="recipe-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-latte-950/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div id="modal-card" class="bg-latte-50 dark:bg-latte-900 border border-latte-300 dark:border-latte-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 transform scale-95 transition-transform duration-300">
+      
+      <div class="flex justify-between items-start pb-4 border-b border-latte-200 dark:border-latte-800">
+        <div>
+          <span id="modal-category" class="text-xs uppercase font-bold tracking-widest text-latte-500"></span>
+          <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-latte-900 dark:text-latte-100 mt-1"></h3>
+        </div>
+        <button onclick="closeModal()" class="w-9 h-9 rounded-full bg-latte-200 dark:bg-latte-800 text-latte-700 dark:text-latte-300 flex items-center justify-center hover:bg-latte-300 transition-colors">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="py-6 space-y-5">
+        <img id="modal-image" src="" alt="Project Visual" class="w-full h-64 object-cover rounded-2xl border border-latte-200 dark:border-latte-800">
+        
+        <div>
+          <h4 class="font-serif font-bold text-base text-latte-900 dark:text-latte-100">Brewing Recipe & Insights</h4>
+          <p id="modal-description" class="text-sm text-latte-700 dark:text-latte-300 leading-relaxed mt-2"></p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-latte-100 dark:bg-latte-800/70 border border-latte-200 dark:border-latte-700 space-y-2">
+          <h5 class="text-xs font-bold uppercase tracking-wider text-latte-900 dark:text-latte-200">Extraction Metrics:</h5>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+            <div>
+              <span class="text-latte-500 block">Performance</span>
+              <span id="modal-stat1" class="font-bold text-latte-800 dark:text-latte-200">99 / 100</span>
+            </div>
+            <div>
+              <span class="text-latte-500 block">Domain</span>
+              <span id="modal-stat2" class="font-bold text-latte-800 dark:text-latte-200">Engineering</span>
+            </div>
+            <div>
+              <span class="text-latte-500 block">Status</span>
+              <span id="modal-stat3" class="font-bold text-latte-800 dark:text-latte-200">Active</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-latte-700 dark:text-latte-400 mb-2">Key Ingredients:</h5>
+          <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-latte-200 dark:border-latte-800 flex items-center justify-end gap-3">
+        <button onclick="closeModal()" class="px-5 py-2.5 rounded-full text-xs font-bold text-latte-700 dark:text-latte-300 hover:bg-latte-200 dark:hover:bg-latte-800 transition-colors">
+          Close Recipe
+        </button>
+        <a id="modal-action-btn" href="#contact" class="px-6 py-2.5 rounded-full bg-latte-900 dark:bg-latte-500 text-latte-50 dark:text-latte-950 text-xs font-bold shadow hover:opacity-90 flex items-center gap-2">
+          <span>Discuss With Adarsh</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Project Database tailored for Adarsh
+    const customProjectData = {
+      cafeportfolio: {
+        title: "aschauhan-dev cafe Engine",
+        category: "Web Crafting • Interactive Single File",
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?fit=crop&w=700&h=450&q=80",
+        description: "The complete artisanal cafe portfolio built for Adarsh Singh Chauhan. Features real-time coffee steam physics, sound-synthesis cafe rain, morning/midnight roast themes, dynamic corkboard bulletin integration with local persistence, and custom SVG branding.",
+        stat1: "100% Lightweight",
+        stat2: "Zero Dependencies",
+        stat3: "BUIT CSE Project",
+        tags: ["HTML5", "CSS3", "JavaScript", "Web Audio API", "TailwindCSS"],
+        link: "#contact"
+      },
+      gradientts: {
+        title: "Gradientts Growth Blueprint",
+        category: "Brand & Growth • Campus Acquisition",
+        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?fit=crop&w=700&h=450&q=80",
+        description: "Devised as part of Adarsh's role as Campus Growth Associate Intern at Gradientts. Implements community funnels, targeted peer engagement, and digital awareness drives to accelerate onboarding and user retention.",
+        stat1: "+40% Growth Target",
+        stat2: "Collegiate Channels",
+        stat3: "Active Internship",
+        tags: ["Community Growth", "Brand Strategy", "Social Media Marketing", "Leadership"],
+        link: "#contact"
+      },
+      airindia: {
+        title: "Air India Collegiate Outreach",
+        category: "Brand Representation • National Flagship",
+        image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?fit=crop&w=700&h=450&q=80",
+        description: "Campus Ambassador campaign executed for Air India Limited. Focused on connecting the university ecosystem with airline career avenues, student concessions, and aviation technology updates.",
+        stat1: "Direct University Reach",
+        stat2: "Brand Advocacy",
+        stat3: "Ongoing Representation",
+        tags: ["Air India", "Campus Ambassador", "Public Speaking", "Event Strategy"],
+        link: "#contact"
+      },
+      aiweb: {
+        title: "AI-Assisted Web Prototype",
+        category: "Cloud & AI • Certified HTML with AI",
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?fit=crop&w=700&h=450&q=80",
+        description: "Developed utilizing principles learned in the 'HTML with AI' certification. Accelerates standard prototyping by orchestrating generative AI workflows into high-fidelity semantic markup and clean layout components.",
+        stat1: "Sub-Second Scaffolding",
+        stat2: "WCAG Compliant",
+        stat3: "Certified Implementation",
+        tags: ["HTML with AI", "CSS3", "Prompt Engineering", "Semantic Web"],
+        link: "#contact"
+      },
+      cloudlab: {
+        title: "Cloud Computing Lab Suite",
+        category: "Cloud Systems • Virtual Infrastructure",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?fit=crop&w=700&h=450&q=80",
+        description: "Academic and certification exploration covering foundational cloud architecture, virtualization, elastic compute resources, and remote storage networks, preparing for enterprise backend development.",
+        stat1: "Cloud Certified",
+        stat2: "IaaS & PaaS",
+        stat3: "Scalable Sandbox",
+        tags: ["Cloud Computing", "Virtualization", "Networking", "Systems"],
+        link: "#contact"
+      },
+      bhopalhub: {
+        title: "Bhopal Collegiate Network",
+        category: "Web & Community • BUIT Student Hub",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?fit=crop&w=700&h=450&q=80",
+        description: "An intuitive student interaction portal tailored for engineering students across Barkatullah University Institute of Technology (BUIT), enabling study group coordination, resource sharing, and hackathon team formations.",
+        stat1: "Collaborative UX",
+        stat2: "BUIT Focused",
+        stat3: "Under Development",
+        tags: ["HTML5", "CSS3", "Community Management", "Peer Leadership"],
+        link: "#contact"
+      }
+    };
+
+    // DOM References
+    const themeBtn = document.getElementById('theme-btn');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('.project-card');
+    const recipeModal = document.getElementById('recipe-modal');
+    const modalCard = document.getElementById('modal-card');
+    const orderForm = document.getElementById('order-form');
+    const orderSuccess = document.getElementById('order-success');
+    const notesContainer = document.getElementById('notes-container');
+    const currentYearSpan = document.getElementById('current-year');
+    const ambientBtn = document.getElementById('ambient-btn');
+    const soundIndicator = document.getElementById('sound-indicator');
+    const soundLabel = document.getElementById('sound-label');
+    const photoInput = document.getElementById('barista-photo-input');
+    const baristaPhoto = document.getElementById('barista-photo');
+    const resetPhotoBtn = document.getElementById('reset-photo-btn');
+    const roastBadge = document.getElementById('roast-badge');
+
+    // Year stamp
+    currentYearSpan.textContent = new Date().getFullYear();
+
+    // ================= BARISTA PHOTO UPLOADER & LOCALSTORAGE PERSISTENCE =================
+    const defaultPhotoSrc = 'IMG_20260305_015141_825_2.webp';
+
+    function initBaristaPhoto() {
+      const savedPhoto = localStorage.getItem('aschauhan_barista_photo');
+      if (savedPhoto) {
+        baristaPhoto.src = savedPhoto;
+        resetPhotoBtn.classList.remove('hidden');
+        roastBadge.classList.add('hidden');
+      }
+    }
+    initBaristaPhoto();
+
+    photoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const base64Data = event.target.result;
+        baristaPhoto.src = base64Data;
+        try {
+          localStorage.setItem('aschauhan_barista_photo', base64Data);
+        } catch (err) {
+          console.warn('Storage quota exceeded, displaying image without persistence');
+        }
+        resetPhotoBtn.classList.remove('hidden');
+        roastBadge.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    resetPhotoBtn.addEventListener('click', () => {
+      localStorage.removeItem('aschauhan_barista_photo');
+      baristaPhoto.src = defaultPhotoSrc;
+      resetPhotoBtn.classList.add('hidden');
+      roastBadge.classList.remove('hidden');
+      photoInput.value = '';
+    });
+
+    // ================= THEME TOGGLE =================
+    function initTheme() {
+      const savedTheme = localStorage.getItem('aschauhan-cafe-theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    initTheme();
+
+    themeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('aschauhan-cafe-theme', isDark ? 'dark' : 'light');
+    });
+
+    // Mobile Menu
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // ================= PROJECT FILTERING =================
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.classList.remove('active-tab', 'bg-latte-900', 'text-latte-50', 'dark:bg-latte-500', 'dark:text-latte-950', 'shadow-sm');
+          t.classList.add('text-latte-700', 'dark:text-latte-300');
+        });
+
+        tab.classList.add('active-tab', 'bg-latte-900', 'text-latte-50', 'dark:bg-latte-500', 'dark:text-latte-950', 'shadow-sm');
+        tab.classList.remove('text-latte-700', 'dark:text-latte-300');
+
+        const category = tab.getAttribute('data-category');
+
+        projectCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.classList.remove('hidden');
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px)';
+            setTimeout(() => {
+              card.classList.add('hidden');
+            }, 250);
+          }
+        });
+      });
+    });
+
+    // ================= MODAL FUNCTIONALITY =================
+    window.openModal = function(projectId) {
+      const data = customProjectData[projectId];
+      if (!data) return;
+
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-category').textContent = data.category;
+      document.getElementById('modal-image').src = data.image;
+      document.getElementById('modal-description').textContent = data.description;
+      document.getElementById('modal-stat1').textContent = data.stat1;
+      document.getElementById('modal-stat2').textContent = data.stat2;
+      document.getElementById('modal-stat3').textContent = data.stat3;
+
+      const tagsContainer = document.getElementById('modal-tags');
+      tagsContainer.innerHTML = '';
+      data.tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-latte-200 dark:bg-latte-800 text-latte-800 dark:text-latte-200';
+        span.textContent = tag;
+        tagsContainer.appendChild(span);
+      });
+
+      recipeModal.classList.remove('hidden');
+      setTimeout(() => {
+        recipeModal.classList.remove('opacity-0');
+        modalCard.classList.remove('scale-95');
+        modalCard.classList.add('scale-100');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeModal = function() {
+      recipeModal.classList.add('opacity-0');
+      modalCard.classList.remove('scale-100');
+      modalCard.classList.add('scale-95');
+      setTimeout(() => {
+        recipeModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 250);
+    };
+
+    recipeModal.addEventListener('click', (e) => {
+      if (e.target === recipeModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !recipeModal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    // ================= CORKBOARD WITH LOCALSTORAGE PERSISTENCE =================
+    const pinPalettes = [
+      { bg: 'bg-amber-100', text: 'text-amber-950', pin: 'bg-red-600', sub: 'text-amber-900/80', border: 'border-amber-200' },
+      { bg: 'bg-emerald-100', text: 'text-emerald-950', pin: 'bg-amber-600', sub: 'text-emerald-900/80', border: 'border-emerald-200' },
+      { bg: 'bg-sky-100', text: 'text-sky-950', pin: 'bg-blue-600', sub: 'text-sky-900/80', border: 'border-sky-200' },
+      { bg: 'bg-purple-100', text: 'text-purple-950', pin: 'bg-rose-600', sub: 'text-purple-900/80', border: 'border-purple-200' },
+    ];
+
+    function loadSavedNotes() {
+      try {
+        const stored = JSON.parse(localStorage.getItem('aschauhan_notes') || '[]');
+        stored.forEach(item => {
+          renderNoteToBoard(item.name, item.message, item.time, false);
+        });
+      } catch(e) {
+        console.error(e);
+      }
+    }
+
+    function renderNoteToBoard(name, message, timeText, save = true) {
+      const palette = pinPalettes[Math.floor(Math.random() * pinPalettes.length)];
+      const randomRot = (Math.random() * 8 - 4).toFixed(1);
+
+      const noteDiv = document.createElement('div');
+      noteDiv.className = `${palette.bg} ${palette.text} ${palette.border} p-4 rounded-lg shadow-cork-pin relative transition-transform hover:scale-105 border`;
+      noteDiv.style.transform = `rotate(${randomRot}deg)`;
+
+      noteDiv.innerHTML = `
+        <span class="w-3.5 h-3.5 rounded-full ${palette.pin} block absolute -top-1.5 left-1/2 -translate-x-1/2 shadow"></span>
+        <p class="font-script text-xl leading-snug">"${message}"</p>
+        <div class="mt-3 flex items-center justify-between text-xs font-sans font-bold ${palette.sub}">
+          <span>- ${name}</span>
+          <span class="text-[10px] font-normal">${timeText}</span>
+        </div>
+      `;
+
+      notesContainer.prepend(noteDiv);
+
+      if (save) {
+        try {
+          const stored = JSON.parse(localStorage.getItem('aschauhan_notes') || '[]');
+          stored.unshift({ name, message, time: timeText });
+          localStorage.setItem('aschauhan_notes', JSON.stringify(stored.slice(0, 10)));
+        } catch(e) {}
+      }
+    }
+
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('customer-name').value.trim();
+      const message = document.getElementById('order-message').value.trim();
+      const drink = document.getElementById('order-drink').value;
+      const pinToBoard = document.getElementById('pin-to-board').checked;
+
+      if (!name || !message) return;
+
+      if (pinToBoard) {
+        const noteMsg = `${message} (${drink})`;
+        renderNoteToBoard(name, noteMsg, "Just now", true);
+      }
+
+      orderSuccess.classList.remove('hidden');
+      orderForm.reset();
+
+      setTimeout(() => {
+        orderSuccess.classList.add('hidden');
+      }, 7000);
+    });
+
+    loadSavedNotes();
+
+    // ================= SYNTHESIZED WEB AUDIO AMBIENCE =================
+    let audioCtx = null;
+    let isPlayingAmbience = false;
+    let noiseNode = null;
+    let crackleInterval = null;
+
+    function initWebAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function startAmbienceAudio() {
+      initWebAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      // Generate pink noise for soft rain / cafe hiss
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        output[i] = (b0 + b1 + b2) * 0.035;
+      }
+
+      noiseNode = audioCtx.createBufferSource();
+      noiseNode.buffer = noiseBuffer;
+      noiseNode.loop = true;
+
+      const lowpass = audioCtx.createBiquadFilter();
+      lowpass.type = 'lowpass';
+      lowpass.frequency.setValueAtTime(420, audioCtx.currentTime);
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+      noiseNode.connect(lowpass);
+      lowpass.connect(gain);
+      gain.connect(audioCtx.destination);
+      noiseNode.start(0);
+
+      // Vinyl crackle simulation
+      crackleInterval = setInterval(() => {
+        if (!isPlayingAmbience || !audioCtx) return;
+        if (Math.random() > 0.45) {
+          const osc = audioCtx.createOscillator();
+          const popGain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(250 + Math.random() * 700, audioCtx.currentTime);
+          popGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
+          popGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.035);
+          osc.connect(popGain);
+          popGain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.04);
+        }
+      }, 190);
+
+      isPlayingAmbience = true;
+      ambientBtn.classList.add('sound-active', 'border-latte-500', 'text-latte-900', 'dark:text-amber-200');
+      soundLabel.textContent = "Brewing Lofi";
+    }
+
+    function stopAmbienceAudio() {
+      if (noiseNode) {
+        try { noiseNode.stop(); } catch(e) {}
+        noiseNode.disconnect();
+        noiseNode = null;
+      }
+      if (crackleInterval) {
+        clearInterval(crackleInterval);
+        crackleInterval = null;
+      }
+      isPlayingAmbience = false;
+      ambientBtn.classList.remove('sound-active', 'border-latte-500', 'text-latte-900', 'dark:text-amber-200');
+      soundLabel.textContent = "Cafe Lofi";
+    }
+
+    ambientBtn.addEventListener('click', () => {
+      if (!isPlayingAmbience) {
+        startAmbienceAudio();
+      } else {
+        stopAmbienceAudio();
+      }
+    });
+
+  </script>
+</body>
+</html>
